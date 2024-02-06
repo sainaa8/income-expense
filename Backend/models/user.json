@@ -23,5 +23,10 @@
     "username": "d",
     "email": "d",
     "pass": "$2b$10$qIG5hfC8ToBYpYiE7DOBw.a9Y3gX.fRo32PbATMWqqFGz.waKM1se"
+  },
+  {
+    "username": "w",
+    "email": "ddd",
+    "pass": "$2b$10$1jFOt9KcitMUcd/7bi3w0eSQxEtNVCQObeQ3bATNMNQZcGuV12.XS"
   }
 ]

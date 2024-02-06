@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InciLCJpYXQiOjE3MDcxOTM1MzMsImV4cCI6MTcwNzE5NzEzM30.GjwTqZPxyXXAqavOY0V0_RM2UD4UJihvRsr9aDrPjbk";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImQiLCJpYXQiOjE3MDcyMTE2MDgsImV4cCI6MTcwNzI5ODAwOH0.B5nXgDeISH7hbHCv1_UQIANEB4g5cPZmi-IvE0RAcM4";
 export const tokenCheck = (req, res, next) => {
   return jwt.verify(
     token,
