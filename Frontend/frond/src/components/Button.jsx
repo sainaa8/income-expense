@@ -1,8 +1,12 @@
 export const Button = (props) => {
-  const { text } = props;
+  const { text, handleSubmit, type } = props;
   return (
-    <div className="w-full bg-blue-500 h-[48px] rounded-[20px] text-white flex items-center text-[20px] justify-center">
+    <button
+      type={type}
+      onClick={handleSubmit}
+      className="w-full bg-blue-500 h-[48px] rounded-[20px] text-white flex items-center text-[20px] justify-center"
+    >
       {text}
-    </div>
+    </button>
   );
 };

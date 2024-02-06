@@ -1,9 +1,11 @@
 import fs from "fs";
+
 const userDB =
   "/Users/23LP8204/Desktop/firstfullProject/Backend/models/user.json";
 
 export const Login = async (req, res) => {
   const { password, email: bodyMail } = req.body;
+
   try {
     const usersFile = await fs.readFileSync(userDB, "utf-8");
     console.log(usersFile);

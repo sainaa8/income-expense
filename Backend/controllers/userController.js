@@ -2,7 +2,7 @@ import { Login } from "../queries/login.js";
 import { CreateNewUser } from "../queries/createAccount.js";
 export const getLogin = async (req, res) => {
   try {
-    res.send(req.userData);
+    res.send(req.token);
   } catch (err) {
     res.status(500).send(err.message);
   }

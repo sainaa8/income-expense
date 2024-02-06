@@ -5,6 +5,7 @@ const userDB =
 export const CreateNewUser = async (req, res) => {
   try {
     const { password, email, username } = req.body;
+    console.log(req.body);
     if (!username || !email || !password) {
       return "Something is missing";
     }

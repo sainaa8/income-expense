@@ -1,4 +1,7 @@
 import fs from "fs";
+
+import jwt from "jsonwebtoken";
+
 import { compareHash } from "../utils/passwordHash.js";
 const userDb =
   "/Users/23LP8204/Desktop/firstfullProject/Backend/models/user.json";
@@ -13,15 +16,23 @@ export const MiddlewareOfLogin = async (req, res, next) => {
 
     if (!user) {
       res.status(400).send("email or password is wrong");
+
+      return;
     }
+    const token = jwt.sign(
+      { email: user.email },
+      process.env.JWT_SECRET || "defaultSecret",
+      { expiresIn: "1d" }
+    );
 
     const passs = compareHash(password, user.pass);
 
     if (passs) {
-      req.userData = user;
+      req.token = token;
+
       next();
     } else {
-      res.status(400).send("email or password is wrong");
+      res.status(400).send("email or password is wrongg");
     }
   } catch (err) {
     res.status(500).send(err.message);
