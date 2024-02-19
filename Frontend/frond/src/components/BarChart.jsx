@@ -1,4 +1,6 @@
+import { BarChartComp } from "./BarChartdata";
 export const BarChart = () => {
+ 
   return (
     <div className="workSans">
       <div className="w-[700px]  bg-white rounded-[12px]">
@@ -7,8 +9,10 @@ export const BarChart = () => {
             Income - Expenseg
           </div>
         </div>
-        <div className="bg-red-300 w-[660px] h-[318px] flex justify-center items-center ">
-          <div className=" bg-red-500">qwd</div>
+        <div className="w-[660px] h-[318px] flex justify-center items-center ">
+       
+          <BarChartComp/>
+      
         </div>
       </div>
     </div>
