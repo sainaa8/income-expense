@@ -6,6 +6,9 @@
   .sss {
     @apply flex justify-center;
   }
+  .size {
+    @apply text-[16px];
+  }
 }
 .workSans {
   font-family: var(--font-work-sans);

@@ -5,7 +5,7 @@ export const Steps = (props) => {
   return (
     <div className=" w-fit flex flex-col items-center gap-[50px]">
       <div className="flex gap-4 items-center">
-        <Image src="/vector.png" alt="vector" width={50} height={50} />
+         
         <div className="text-[30px] font-bold">Geld</div>
       </div>
       <div>

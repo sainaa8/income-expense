@@ -28,5 +28,10 @@
     "username": "w",
     "email": "ddd",
     "pass": "$2b$10$1jFOt9KcitMUcd/7bi3w0eSQxEtNVCQObeQ3bATNMNQZcGuV12.XS"
+  },
+  {
+    "username": "e",
+    "email": "e",
+    "pass": "$2b$10$0uMWvBSb6WlrfvceqrIFgeWwpEGU.SDKmj5/WqcWC1n0GFvIYmoca"
   }
 ]
