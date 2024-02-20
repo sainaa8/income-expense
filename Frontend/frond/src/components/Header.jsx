@@ -6,12 +6,12 @@ import { useContext } from "react";
 import { AddRecordContext } from "./AddRecordProvider";
 
 export const Header = ({ children }) => {
+  const { push } = useRouter();
   const { record, setRecord } = useContext(AddRecordContext);
   const handleRecord = () => {
     setRecord(!record);
+    push("/records");
   };
-
-  const { push } = useRouter();
 
   const [bold, setBold] = useState(false);
   const handlepush = () => {
@@ -21,6 +21,7 @@ export const Header = ({ children }) => {
 
   const handlePushdash = () => {
     push("/");
+    setRecord(false);
     setBold(!bold);
   };
 
