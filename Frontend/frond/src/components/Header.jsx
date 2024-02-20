@@ -7,22 +7,24 @@ import { AddRecordContext } from "./AddRecordProvider";
 
 export const Header = ({ children }) => {
   const { push } = useRouter();
+  const [bold, setBold] = useState(false);
   const { record, setRecord } = useContext(AddRecordContext);
   const handleRecord = () => {
+    setBold(false);
     setRecord(!record);
+
     push("/records");
   };
 
-  const [bold, setBold] = useState(false);
   const handlepush = () => {
     push("/records");
-    setBold(!bold);
+    setBold(false);
   };
 
   const handlePushdash = () => {
     push("/");
     setRecord(false);
-    setBold(!bold);
+    setBold(true);
   };
 
   return (
