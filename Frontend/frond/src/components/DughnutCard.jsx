@@ -2,7 +2,7 @@ import { GoDotFill } from "react-icons/go";
 export const DoughnutData = (props) => {
   const { color, desc, ammount, percent } = props;
   return (
-    <div className="flex w-full items-center gap-9 justify-between">
+    <div className="flex w-full items-center gap-16 justify-between">
       <div className="flex items-center w-[100px]">
         <GoDotFill color={color} size={20} />
         <p>{desc}</p>
@@ -16,5 +16,3 @@ export const DoughnutData = (props) => {
     </div>
   );
 };
-
-

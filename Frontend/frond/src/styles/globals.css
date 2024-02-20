@@ -6,6 +6,9 @@
   .sss {
     @apply flex justify-center;
   }
+  .sa {
+    @apply flex justify-center items-center;
+  }
   .size {
     @apply text-[16px];
   }
