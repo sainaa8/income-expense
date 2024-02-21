@@ -27,7 +27,7 @@ export const Create = () => {
         userdata
       );
       if (typeof data !== "string") {
-        push("/login");
+        push("/sign1");
       }
       if (typeof data === "string") {
         setError(data);

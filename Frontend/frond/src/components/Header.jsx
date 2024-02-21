@@ -5,32 +5,49 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AddRecordContext } from "./AddRecordProvider";
 
-export const Header = ({ children }) => {
+import { AddRecord } from "./AddRecord";
+import { LastCatigory } from "./LASTaddCatigory";
+
+import { AddCatigoryContext } from "./AddCatiProvider";
+
+export const Header = () => {
   const { push } = useRouter();
-  const [bold, setBold] = useState(false);
+  const [bold, setBold] = useState(true);
+
   const { record, setRecord } = useContext(AddRecordContext);
+  const { addCati, setAddCati } = useContext(AddCatigoryContext);
+
   const handleRecord = () => {
     setBold(false);
     setRecord(!record);
-
     push("/records");
   };
 
   const handlepush = () => {
-    push("/records");
     setBold(false);
+    push("/records");
   };
 
   const handlePushdash = () => {
-    push("/");
-    setRecord(false);
     setBold(true);
+    push("/dashboard");
+    setRecord(false);
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center ">
       <div className="workSans">
-        <div className=" px-[20px] w-[1440px] py-[24px] flex justify-between">
+        {record && (
+          <div onClick={() => setRecord(false)}>
+            <div className="w-screen h-screen left-0 bg-black opacity-50 fixed "></div>
+          </div>
+        )}
+        {!addCati && (
+          <div onClick={() => setAddCati(true)}>
+            <div className="w-screen h-screen left-0 bg-black opacity-50 fixed "></div>
+          </div>
+        )}
+        <div className=" px-[20px] w-[1440px] py-[24px] flex justify-between ">
           <div className="flex items-center gap-[34px]">
             <Image src="/vector.png" alt="vector" width={50} height={50} />
             <div
@@ -68,11 +85,20 @@ export const Header = ({ children }) => {
         <div>
           {record && (
             <div>
-              <div className="w-[792px] h-[520px] bg-[#F9F9F9] rounded-[10px] fixed top-[400px]  "></div>
+              <div>
+                <AddRecord />
+              </div>
+            </div>
+          )}
+
+          {!addCati && (
+            <div>
+              <div>
+                <LastCatigory />
+              </div>
             </div>
           )}
         </div>
-        {children}
       </div>
     </div>
   );

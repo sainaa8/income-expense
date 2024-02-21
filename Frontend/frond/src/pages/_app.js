@@ -7,15 +7,16 @@ const workSans = Work_Sans({
 });
 
 import AddRecordProvider from "@/components/AddRecordProvider";
+import AddCatigoryProvider from "@/components/AddCatiProvider";
 
 export default function App({ Component, pageProps }) {
   return (
     <main className={`${workSans.variable}`}>
-      <AddRecordProvider>
-        <Header>
+      <AddCatigoryProvider>
+        <AddRecordProvider>
           <Component {...pageProps} />;
-        </Header>
-      </AddRecordProvider>
+        </AddRecordProvider>
+      </AddCatigoryProvider>
     </main>
   );
 }

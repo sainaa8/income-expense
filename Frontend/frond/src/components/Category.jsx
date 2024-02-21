@@ -20,6 +20,7 @@ export const CatigoryMenu = (props) => {
 };
 
 import { FaPlus } from "react-icons/fa6";
+import { Login } from "./Login";
 
 export const Category = () => {
   const catigoryName = [
@@ -54,6 +55,14 @@ export const Category = () => {
       name: "Others",
     },
   ];
+  const handleLog = (el) => {
+    const temp = el.name
+      .replace("&", "")
+      .replace(",", "")
+      .replace(" ", "")
+      .replace(" ", "");
+    console.log(temp);
+  };
 
   return (
     <div className="workSans">
@@ -63,7 +72,11 @@ export const Category = () => {
       </div>
       <div className="mt-[16px]">
         {catigoryName.map((el, id) => (
-          <div key={id} className="mt-[3px] ml-[10px]">
+          <div
+            key={id}
+            className="mt-[3px] ml-[10px]"
+            onClick={() => handleLog(el)}
+          >
             <CatigoryMenu names={el.name} />
           </div>
         ))}

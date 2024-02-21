@@ -30,7 +30,7 @@ export const Login = () => {
         localStorage.setItem("token", res.data);
       });
 
-      push("/");
+      push("/dashboard");
     } catch (error) {
       console.log(error);
       setError(error.response.data);
