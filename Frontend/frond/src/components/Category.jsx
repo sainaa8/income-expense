@@ -1,8 +1,13 @@
 import { MdRemoveRedEye } from "react-icons/md";
 import { IoMdArrowDropright } from "react-icons/io";
 
+
+
 export const CatigoryMenu = (props) => {
   const { names } = props;
+  
+  
+
   return (
     <div className="flex justify-between items-center py-[10px]">
       <div className="flex items-center gap-2">
@@ -20,9 +25,18 @@ export const CatigoryMenu = (props) => {
 };
 
 import { FaPlus } from "react-icons/fa6";
-import { Login } from "./Login";
+// import { Login } from "./Login";
+import { useContext } from "react";
+import { AddCatigoryContext } from "./AddCatiProvider";
 
 export const Category = () => {
+  const { addCati, setAddCati } = useContext(AddCatigoryContext);
+
+ const handleClick = ()=>{
+  setAddCati(false)
+ }
+
+
   const catigoryName = [
     {
       name: "Food & Drinks",
@@ -80,8 +94,8 @@ export const Category = () => {
             <CatigoryMenu names={el.name} />
           </div>
         ))}
-        <div className="ml-[10px] mt-[10px] flex gap-[10px]">
-          <div className="text-[20px] text-blue-500">
+        <div onClick={handleClick} className="ml-[10px] mt-[10px] flex gap-[10px] cursor-pointer">
+          <div  className="text-[20px] text-blue-500">
             <FaPlus />
           </div>
           add catigory

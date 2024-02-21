@@ -22,8 +22,7 @@ import {
   PiTShirtFill,
 } from "react-icons/pi";
 import { HiComputerDesktop } from "react-icons/hi2";
-// import { useState } from "react";
-// import { DropDown } from "./DropdownIcons";
+
 
 import { useContext } from "react";
 import { AddCatigoryContext } from "./AddCatiProvider";
