@@ -68,7 +68,7 @@ export const AddRecord = () => {
             <div
               className={` ${
                 main ? "bg-blue-700 " : "bg-[#16A34A]"
-              } mt-[20px] bg-blue-500 rounded-[100px] flex justify-center items-center h-[40px] text-white`}
+              } mt-[20px] rounded-[100px] flex justify-center items-center h-[40px] text-white`}
             >
               <button>Add Record</button>
             </div>

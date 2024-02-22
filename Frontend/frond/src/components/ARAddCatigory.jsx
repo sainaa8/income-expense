@@ -23,7 +23,6 @@ import {
 } from "react-icons/pi";
 import { HiComputerDesktop } from "react-icons/hi2";
 
-
 import { useContext } from "react";
 import { AddCatigoryContext } from "./AddCatiProvider";
 import { AddRecordContext } from "./AddRecordProvider";
@@ -48,11 +47,6 @@ export const Addati = () => {
       icon: <HiComputerDesktop size={24} color="#D1D5DB" />,
       name: "Communication",
     },
-    { icon: <GoHomeFill size={24} color="#0166FF" />, name: " Home" },
-    { icon: <GoHomeFill size={24} color="#0166FF" />, name: " Home" },
-    { icon: <GoHomeFill size={24} color="#0166FF" />, name: " Home" },
-    { icon: <GoHomeFill size={24} color="#0166FF" />, name: " Home" },
-    { icon: <GoHomeFill size={24} color="#0166FF" />, name: " Home" },
   ];
   return (
     <div className="overflow-auto h-[310px] ">

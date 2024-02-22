@@ -5,11 +5,11 @@ import { useState } from "react";
 import Image from "next/image";
 import axios from "axios";
 export const Create = () => {
-  const [userdata, setUserData] = useState("");
+  const [userdata, setUserData] = useState({});
   const [error, setError] = useState();
   const { push } = useRouter();
   const handleClick = () => {
-    push("/login");
+    push("/");
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
