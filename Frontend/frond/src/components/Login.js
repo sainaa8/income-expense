@@ -27,7 +27,7 @@ export const Login = () => {
     try {
       await axios.post("http://localhost:8000/login", userData).then((res) => {
         console.log(res.data);
-        // localStorage.setItem("token", res.data);
+        localStorage.setItem("token", res.data);
       });
 
       push("/dashboard");

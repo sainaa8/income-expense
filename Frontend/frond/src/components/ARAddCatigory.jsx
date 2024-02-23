@@ -27,13 +27,17 @@ import { useContext } from "react";
 import { AddCatigoryContext } from "./AddCatiProvider";
 import { AddRecordContext } from "./AddRecordProvider";
 
-export const Addati = () => {
+export const Addati = (props) => {
+  const { setValue, setCategory } = props;
   const { addCati, setAddCati } = useContext(AddCatigoryContext);
   const { record, setRecord } = useContext(AddRecordContext);
 
   const handlerClick = () => {
     setRecord(false);
     setAddCati(!addCati);
+  };
+  const handleUndo = () => {
+    setCategory(true);
   };
 
   const options = [
@@ -59,8 +63,10 @@ export const Addati = () => {
       </div>
       <div>
         {options.map((el, id) => (
-          <div key={id}>
-            <CatigoryModal icon={el.icon} name={el.name} />
+          <div key={id} onClick={() => setValue(el.name)}>
+            <div onClick={handleUndo}>
+              <CatigoryModal icon={el.icon} name={el.name} />
+            </div>
           </div>
         ))}
       </div>

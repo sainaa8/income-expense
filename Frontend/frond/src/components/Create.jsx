@@ -26,7 +26,7 @@ export const Create = () => {
         "http://localhost:8000/create",
         userdata
       );
-      if (typeof data !== "string") {
+      if (data === "succsess") {
         push("/sign1");
       }
       if (typeof data === "string") {

@@ -21,6 +21,18 @@ export const AddRecord = () => {
     setMain(true);
   };
   // const
+  const [recordData, setRecordData] = useState({});
+
+  const handleChange = (el) => {
+    const { name, value } = el.target;
+    setRecordData({ ...recordData, [name]: value });
+  };
+
+  const handleSubmit = (el) => {
+    el.preventDefault();
+    console.log(recordData);
+    // console.log(asd);
+  };
 
   return (
     <div className="workSans">
@@ -33,7 +45,7 @@ export const AddRecord = () => {
             </div>
           </div>
         </div>
-        <div className="w-[100%] flex">
+        <form onSubmit={handleSubmit} className="w-[100%] flex">
           <div className="w-[50%] px-[24px] py-[20px]">
             <div className="w-[348px] h-[50px] rounded-[100px] bg-[#F5F5F5] flex">
               <div
@@ -56,11 +68,24 @@ export const AddRecord = () => {
             <div className="w-[348px] h-[76px] mt-[20px] rounded-[5px] bg-[#F5F5F5] flex items-center border border-gray-300">
               <div className="ml-[20px]">
                 Amount
-                <div className="text-gray-400">₮ 000.00</div>
+                <div className="text-gray-500 flex gap-[10px]">
+                  ₮
+                  <input
+                    onChange={handleChange}
+                    name="amount"
+                    type="text"
+                    className="outline-none bg-[#F5F5F5]"
+                    placeholder="000,00"
+                  />
+                </div>
               </div>
             </div>
             <div className="mt-[20px]">
-              <ARCatigory main={main} />
+              <ARCatigory
+                main={main}
+                // name="category"
+                // handleChange={handleChange}
+              />
             </div>
             <div className="mt-[20px]">
               <ADdate />
@@ -78,6 +103,9 @@ export const AddRecord = () => {
               <div className="mb-[8px]">Payee</div>
               <div className=" w-[348px] h-[48px] bg-[#F5F5F5] px-[16px] rounded-[5px] border border-gray-300 flex items-center">
                 <input
+                  onChange={handleChange}
+                  name="payee"
+                  type="text"
                   placeholder="Write here"
                   className="h-[30px] bg-[#F5F5F5] outline-none"
                 />
@@ -87,13 +115,18 @@ export const AddRecord = () => {
               <div className="mb-[8px] ">Note</div>
               <div className="w-[348px] h-[300px] bg-[#F5F5F5] py-[16px] px-[16px] rounded-[5px] border border-gray-300 flex items-center justify-center ]">
                 <textarea
+                  onChange={handleChange}
+                  name="note"
+                  type="text"
+                  rows="10"
+                  cols="30"
                   placeholder="Write here"
                   className="bg-[#F5F5F5] w-[310px] h-[270px] outline-none"
                 />
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
