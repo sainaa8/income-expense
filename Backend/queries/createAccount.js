@@ -1,4 +1,3 @@
-import fs from "fs";
 import { Makehash } from "../utils/passwordHash.js";
 
 import { client } from "/Users/23LP8204/Desktop/firstfullProject/Backend/index.js";
@@ -6,7 +5,7 @@ import { client } from "/Users/23LP8204/Desktop/firstfullProject/Backend/index.j
 const createUser = async (username, password, email, age) => {
   const userCreateQuery = `
   INSERT INTO users(username, password, email, age)
-  VALUES ($1, $2, $3, $4) RETURNING *;
+  VALUES ($1, $2, $3, $4);
   `;
 
   const iserId = await client.query(userCreateQuery, [
@@ -16,29 +15,33 @@ const createUser = async (username, password, email, age) => {
     age,
   ]);
 
-  console.log(iserId.rows[0]);
   return iserId.rows[0];
 };
-// const getUserQuery = async (username, password, email, age) => {
-//   const loginUserQuery = `SELECT * FROM users`;
-//   const user = await client.query(loginUserQuery);
-//   console.log(user.rows);
-//   return user.rows;
-// };
+const getUserQuery = async (email) => {
+  const loginUserQuery = `SELECT * FROM users WHERE email = $1`;
+  const user = await client.query(loginUserQuery, [email]);
+
+  return user.rows;
+};
 
 export const CreateNewUser = async (req, res) => {
   const { username, password, email, age } = req.body;
+
   try {
+    if (!username || !email || !password) {
+      return "Something is missing";
+    }
+    const userscheck = await getUserQuery(email);
+    console.log(userscheck);
+    if (userscheck.length > 0) {
+      console.log("user already exist");
+      return "User already exist";
+    }
+
     const users = await createUser(username, password, email, age);
 
-    // const userscheck = await getUserQuery(username, password, email, age);
-    // const user = userscheck.find((user) => user.email === email);
-    // if (!user) {
-    //   throw new Error("user alreday exist");
-    // }
-
     console.log(users);
-    return users;
+    return "succsess";
   } catch (err) {
     console.log();
     err.message;
