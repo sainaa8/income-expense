@@ -41,6 +41,7 @@ export const CreateNewUser = async (req, res) => {
     const users = await createUser(username, password, email, age);
 
     console.log(users);
+    await client.end();
     return "succsess";
   } catch (err) {
     console.log();

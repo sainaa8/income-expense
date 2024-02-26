@@ -28,7 +28,7 @@ import { AddCatigoryContext } from "./AddCatiProvider";
 import { AddRecordContext } from "./AddRecordProvider";
 
 export const Addati = (props) => {
-  const { setValue, setCategory } = props;
+  const { setValue, setCategory, setRecordData } = props;
   const { addCati, setAddCati } = useContext(AddCatigoryContext);
   const { record, setRecord } = useContext(AddRecordContext);
 
@@ -36,12 +36,15 @@ export const Addati = (props) => {
     setRecord(false);
     setAddCati(!addCati);
   };
-  const handleUndo = () => {
+
+  const categorySelectHandler = (element) => {
+    setValue(element.name);
+    setRecordData((prev) => ({ ...prev, category: element.name }));
     setCategory(true);
   };
 
   const options = [
-    { icon: <GoHomeFill size={24} color="#0166FF" />, name: " Home" },
+    { icon: <GoHomeFill size={24} color="#0166FF" />, name: "Home" },
     { icon: <PiGiftFill size={24} color="#FF4545" />, name: "Gift" },
     { icon: <PiForkKnifeFill size={24} color="#FB8A22" />, name: "Food" },
     { icon: <PiWineFill size={24} color="#A804AB" />, name: "Drink" },
@@ -62,11 +65,9 @@ export const Addati = (props) => {
         <div>Add Category</div>
       </div>
       <div>
-        {options.map((el, id) => (
-          <div key={id} onClick={() => setValue(el.name)}>
-            <div onClick={handleUndo}>
-              <CatigoryModal icon={el.icon} name={el.name} />
-            </div>
+        {options.map((el, index) => (
+          <div key={index} onClick={() => categorySelectHandler(el)}>
+            <CatigoryModal icon={el.icon} name={el.name} />
           </div>
         ))}
       </div>

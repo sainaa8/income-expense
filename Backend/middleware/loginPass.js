@@ -38,9 +38,12 @@ export const MiddlewareOfLogin = async (req, res, next) => {
           expiresIn: "1d",
         }
       );
-      console.log(token);
-      req.token = token;
+      // console.log(token);
+      // req.token = token;
+      req.token = users[0].email;
+      console.log(users[0].email);
       next();
+      await client.end();
     } else {
       res.status(400).send("email or password is wrongpas");
     }

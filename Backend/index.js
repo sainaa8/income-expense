@@ -19,14 +19,6 @@ const CONNECTION_STRING =
 
 export const client = new pg.Client({ connectionString: CONNECTION_STRING });
 
-const dbinit = async () => {
-  await client.connect();
-  await createYserTable();
-  // await createAddrecordTable();
-  await createCati();
-};
-dbinit();
-
 const createYserTable = async () => {
   const query = `CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -38,8 +30,24 @@ const createYserTable = async () => {
   await client.query(query);
 };
 
-const createCati = async () => {
-  const add = `CREATE TABLE IF NOT EXISTS addd (
+const createIncomeExpencedate = async () => {
+  const IncExp = `CREATE TABLE IF NOT EXISTS income_expense (
+    id SERIAL PRIMARY KEY,
+    amount TEXT NOT NULL,
+    category TEXT NOT NULL,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    payee TEXT NOT NULL,
+    note TEXT NOT NULL,
+    types TEXT NOT NULL,
+    email TEXT NOT NULL
+  )`;
+  await client.query(IncExp);
+};
+
+const createCatiExpence = async () => {
+  const add = `CREATE TABLE IF NOT EXISTS addd
+  (
     id SERIAL PRIMARY KEY,
     amount TEXT NOT NULL,
     category TEXT NOT NULL,
@@ -51,7 +59,35 @@ const createCati = async () => {
   )`;
   await client.query(add);
 };
+const createCatiIncome = async () => {
+  const addIncome = `CREATE TABLE IF NOT EXISTS income
+  (
+    id SERIAL PRIMARY KEY,
+    amount TEXT NOT NULL,
+    category TEXT NOT NULL,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    payee TEXT NOT NULL,
+    note TEXT NOT NULL 
+    
+  )`;
+  await client.query(addIncome);
+};
 
+const dbinit = async () => {
+  await client.connect();
+  await createYserTable();
+  // await createAddrecordTable();
+  await createCatiExpence();
+  await createCatiIncome();
+  await createIncomeExpencedate();
+};
+dbinit();
+client.on("error", async (error, cl) => {
+  if (error) {
+    await client.connect();
+  }
+});
 // const createAddrecordTable = async () => {
 //   const addrecordq = `CREATE TABLE IF NOT EXISTS record (
 //     id SERIAL PRIMARY KEY,

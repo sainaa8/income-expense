@@ -32,7 +32,6 @@ export const Create = () => {
       if (typeof data === "string") {
         setError(data);
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
       setError(error.message);

@@ -4,14 +4,19 @@ import { ADdate } from "./ADdate&time";
 import { useState } from "react";
 import { useContext } from "react";
 import { AddRecordContext } from "./AddRecordProvider";
+import axios from "axios";
 
 export const AddRecord = () => {
   const { record, setRecord } = useContext(AddRecordContext);
+
+  const [recordData, setRecordData] = useState({});
+  const [value, setValue] = useState("");
+
   const [main, setMain] = useState(true);
+  const [error, setError] = useState();
 
   const handleRecord = () => {
     setRecord(false);
-    console.log("asd");
   };
 
   const handlerMainGreen = () => {
@@ -20,23 +25,33 @@ export const AddRecord = () => {
   const handlerMainBlue = () => {
     setMain(true);
   };
-  // const
-  const [recordData, setRecordData] = useState({});
 
   const handleChange = (el) => {
     const { name, value } = el.target;
     setRecordData({ ...recordData, [name]: value });
   };
 
-  const handleSubmit = (el) => {
+  const handleSubmit = async (el) => {
     el.preventDefault();
-    console.log(recordData);
-    // console.log(asd);
+    try {
+      const { data } = await axios.post(
+        `${
+          main
+            ? "http://localhost:8000/addRecord"
+            : "http://localhost:8000/addRecordIncome"
+        }`,
+
+        recordData
+      );
+      setRecord(false);
+    } catch (err) {
+      setError(err.response.data);
+    }
   };
 
   return (
     <div className="workSans">
-      <div className="w-[792px] bg-white  rounded-[10px] fixed index-200 left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] ">
+      <div className="w-[792px] bg-white  rounded-[10px] fixed index-200 left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] pb-[30px] sss flex-col ">
         <div className="w-[100%]  text-[24px] font-semibold ">
           <div className="px-[24px] flex justify-between py-[20px] border-b border-black">
             Add record
@@ -83,20 +98,25 @@ export const AddRecord = () => {
             <div className="mt-[20px]">
               <ARCatigory
                 main={main}
-                // name="category"
-                // handleChange={handleChange}
+                name="category"
+                setRecordData={setRecordData}
+                setValue={setValue}
+                value={value}
               />
             </div>
             <div className="mt-[20px]">
-              <ADdate />
+              <ADdate handleChange={handleChange} />
             </div>
-            <div
+            <button
+              value="submit"
+              type="submit"
+              onClick={handleSubmit}
               className={` ${
                 main ? "bg-blue-700 " : "bg-[#16A34A]"
-              } mt-[20px] rounded-[100px] flex justify-center items-center h-[40px] text-white`}
+              } mt-[20px] rounded-[100px] w-[100%] flex justify-center items-center h-[40px] text-white`}
             >
-              <button>Add Record</button>
-            </div>
+              Add Record
+            </button>
           </div>
           <div className="w-[50%] px-[24px] py-[20px]">
             <div>
@@ -126,7 +146,9 @@ export const AddRecord = () => {
               </div>
             </div>
           </div>
+          asdads
         </form>
+        {error && <div className="text-red-500">{error}</div>}
       </div>
     </div>
   );
