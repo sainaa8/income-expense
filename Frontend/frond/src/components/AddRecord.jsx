@@ -1,7 +1,7 @@
 import { MdClear } from "react-icons/md";
 import { ARCatigory } from "./ARCatigory";
 import { ADdate } from "./ADdate&time";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AddRecordContext } from "./AddRecordProvider";
 import axios from "axios";
@@ -22,6 +22,7 @@ export const AddRecord = () => {
   const handlerMainGreen = () => {
     setMain(false);
   };
+
   const handlerMainBlue = () => {
     setMain(true);
   };
@@ -31,15 +32,21 @@ export const AddRecord = () => {
     setRecordData({ ...recordData, [name]: value });
   };
 
+  const mail = localStorage.getItem("Email");
+
+  useEffect(() => {
+    setRecordData({
+      ...recordData,
+      email: mail,
+      types: main ? "expence" : "income",
+    });
+  }, [main]);
   const handleSubmit = async (el) => {
     el.preventDefault();
+
     try {
-      const { data } = await axios.post(
-        `${
-          main
-            ? "http://localhost:8000/addRecord"
-            : "http://localhost:8000/addRecordIncome"
-        }`,
+      await axios.post(
+        "http://localhost:8000/incomeExpence",
 
         recordData
       );

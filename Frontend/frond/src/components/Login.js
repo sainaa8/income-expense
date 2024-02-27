@@ -4,10 +4,13 @@ import { Button } from "@/components/Button";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
+
+import { useContext } from "react";
+import { IncomeExpenceContext } from "./ExpenceIncomeData";
 
 export const Login = () => {
+  const { records, setRecords } = useContext(IncomeExpenceContext);
+
   const { push } = useRouter();
   const [userData, setuserData] = useState("");
   const [error, setError] = useState();
@@ -25,10 +28,12 @@ export const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8000/login", userData).then((res) => {
-        console.log(res.data);
-        localStorage.setItem("Email", res.data);
-      });
+      const data = await axios.post("http://localhost:8000/login", userData);
+
+      localStorage.setItem("Email", data.data.mail);
+
+      setRecords(data.data.allExpenceIncome);
+      // console.log(records);
 
       push("/dashboard");
     } catch (error) {
@@ -36,6 +41,8 @@ export const Login = () => {
       setError(error.response.data);
     }
   };
+  console.log(records);
+  // console.log(handleSubmit.data.data);
 
   return (
     <div className="workSans">

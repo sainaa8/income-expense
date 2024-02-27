@@ -8,15 +8,18 @@ const workSans = Work_Sans({
 
 import AddRecordProvider from "@/components/AddRecordProvider";
 import AddCatigoryProvider from "@/components/AddCatiProvider";
+import IncomeExpenceProvider from "@/components/ExpenceIncomeData";
 
 export default function App({ Component, pageProps }) {
   return (
     <main className={`${workSans.variable}`}>
-      <AddCatigoryProvider>
-        <AddRecordProvider>
-          <Component {...pageProps} />;
-        </AddRecordProvider>
-      </AddCatigoryProvider>
+      <IncomeExpenceProvider>
+        <AddCatigoryProvider>
+          <AddRecordProvider>
+            <Component {...pageProps} />;
+          </AddRecordProvider>
+        </AddCatigoryProvider>
+      </IncomeExpenceProvider>
     </main>
   );
 }

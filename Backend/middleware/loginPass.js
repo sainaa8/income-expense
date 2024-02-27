@@ -5,6 +5,12 @@ import jwt from "jsonwebtoken";
 import { compareHash } from "../utils/passwordHash.js";
 import { client } from "/Users/23LP8204/Desktop/firstfullProject/Backend/index.js";
 
+const getExpenceIncomeTable = async (email) => {
+  const allExpenceIncomeQuery = `SELECT * FROM income_expense WHERE email = $1`;
+  const expenceIncome = await client.query(allExpenceIncomeQuery, [email]);
+  return expenceIncome.rows;
+};
+
 const getUserQuery = async (email) => {
   const loginUserQuery = `SELECT * FROM users WHERE email = $1`;
   const user = await client.query(loginUserQuery, [email]);
@@ -21,6 +27,8 @@ export const MiddlewareOfLogin = async (req, res, next) => {
     //   res.status(400).send("please provide email and password");
     // }
     const users = await getUserQuery(email);
+    const allExpenceIncome = await getExpenceIncomeTable(email);
+    console.log(allExpenceIncome);
     console.log(users);
     if (users.length === 0) {
       res.status(400).send("email or password is wrong");
@@ -40,10 +48,11 @@ export const MiddlewareOfLogin = async (req, res, next) => {
       );
       // console.log(token);
       // req.token = token;
-      req.token = users[0].email;
+      // req.allExpenceIncome = allExpenceIncome;
+      req.token = { mail: users[0].email, allExpenceIncome: allExpenceIncome };
       console.log(users[0].email);
       next();
-      await client.end();
+      // await client.end();
     } else {
       res.status(400).send("email or password is wrongpas");
     }

@@ -6,6 +6,7 @@ import { incomeExpense } from "../queries/incomeExpemce.js";
 
 export const getLogin = async (req, res) => {
   try {
+    // res.send(req.allExpenceIncome);
     res.send(req.token);
   } catch (err) {
     res.status(500).send(err.message);

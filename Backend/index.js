@@ -45,41 +45,9 @@ const createIncomeExpencedate = async () => {
   await client.query(IncExp);
 };
 
-const createCatiExpence = async () => {
-  const add = `CREATE TABLE IF NOT EXISTS addd
-  (
-    id SERIAL PRIMARY KEY,
-    amount TEXT NOT NULL,
-    category TEXT NOT NULL,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
-    payee TEXT NOT NULL,
-    note TEXT NOT NULL 
-    
-  )`;
-  await client.query(add);
-};
-const createCatiIncome = async () => {
-  const addIncome = `CREATE TABLE IF NOT EXISTS income
-  (
-    id SERIAL PRIMARY KEY,
-    amount TEXT NOT NULL,
-    category TEXT NOT NULL,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
-    payee TEXT NOT NULL,
-    note TEXT NOT NULL 
-    
-  )`;
-  await client.query(addIncome);
-};
-
 const dbinit = async () => {
   await client.connect();
   await createYserTable();
-  // await createAddrecordTable();
-  await createCatiExpence();
-  await createCatiIncome();
   await createIncomeExpencedate();
 };
 dbinit();
