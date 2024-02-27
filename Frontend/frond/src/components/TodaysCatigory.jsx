@@ -2,66 +2,77 @@ import { MdHomeFilled } from "react-icons/md";
 import { PiForkKnifeFill } from "react-icons/pi";
 
 export const CatigoryType = (props) => {
-  const { coor, icon, iCol } = props;
+  const { coor, icon, iCol, amount, cate, time } = props;
   return (
     <div>
       <div className="bg-white rounded-lg w-[950px] flex justify-between items-center border border-gray-300 ">
         <div className="flex px-[25px] py-[17px] gap-[25px] items-center">
           <input type="checkbox" className="w-[30px] h-[30px] border  " />
           <div
-            className={`rounded-full  px-[6px]  py-[6px] w-fit h-fit text-white text-[30px] ${iCol}`}
+            className={`rounded-full  px-[6px]  py-[6px] w-fit h-fit text-white text-[30px] bg-red-400 ${iCol}`}
           >
             {icon}
           </div>
           <div>
-            <div>Lending & Renting</div>
-            <div className="text-gray-500">14:00</div>
+            <div>{cate}</div>
+            <div className="text-gray-500">{time}</div>
           </div>
         </div>
         <div className={`mr-[25px] text-[24px] font-semibold ${coor}`}>
-          1,000₮
+          ₮ {amount}
         </div>
       </div>
     </div>
   );
 };
 
+import { useContext } from "react";
+import { IncomeExpenceContext } from "./ExpenceIncomeData";
+import { useState, useEffect } from "react";
+import LazyResult from "postcss/lib/lazy-result";
+import { Lavishly_Yours } from "@next/font/google";
+import { FaLastfmSquare } from "react-icons/fa";
+import { HiGift } from "react-icons/hi2";
+
 export const TodaysCatigory = () => {
-  const gain = [
-    {
-      icon: <MdHomeFilled />,
-      iCol: "bg-blue-500",
-      col: "text-green-500",
-    },
-    {
-      icon: <PiForkKnifeFill />,
-      iCol: "bg-red-500",
-      col: "text-red-500",
-    },
-    {
-      icon: <PiForkKnifeFill />,
-      iCol: "bg-red-500",
-      col: "text-orange-300",
-    },
-    {
-      icon: <PiForkKnifeFill />,
-      iCol: "bg-red-500",
-      col: "text-orange-300",
-    },
-    {
-      icon: <PiForkKnifeFill />,
-      iCol: "bg-red-500",
-      col: "text-orange-300",
-    },
-  ];
+  const { records } = useContext(IncomeExpenceContext);
+  const [date, setDate] = useState();
+  const [LastDays, setLastDays] = useState([]);
+  console.log(records);
+
+  useEffect(() => {
+    const lastRecord = records[records.length - 1];
+    console.log(lastRecord);
+
+    setDate(lastRecord.date);
+    const las = records.filter((el) => el.date === date);
+    setLastDays(las);
+  }, []);
+
+  console.log(date);
+
+  console.log(LastDays);
 
   return (
     <div className="workSans">
-      <div className="text-[24px] font-semibold mb-[12px]">Today</div>
+      <div className="text-[24px] font-semibold mb-[12px]">{date}</div>
       <div className="flex flex-col gap-[10px]">
-        {gain.map((el, id) => (
+        {LastDays.slice(-6, -1).map((el, id) => (
           <div key={id}>
-            <CatigoryType coor={el.col} icon={el.icon} iCol={el.iCol} />
+            <CatigoryType
+              coor={el.types === "expence" ? "text-red-500" : "text-green-500"}
+              amount={el.amount}
+              cate={el.category}
+              time={el.time}
+              icon={
+                (el.category === "Home" && <MdHomeFilled />) ||
+                (el.category === "Gift" && <HiGift />)
+              }
+              iCol={el.category === "Home" && "bg-red-400"}
+              // iCol={el.category === "Food" && <PiForkKnifeFill />}
+              // icon={el.icon}
+              // iCol={el.iCol}
+            />
           </div>
         ))}
       </div>

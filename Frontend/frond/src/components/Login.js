@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
@@ -31,8 +31,9 @@ export const Login = () => {
       const data = await axios.post("http://localhost:8000/login", userData);
 
       localStorage.setItem("Email", data.data.mail);
+      const rec = data.data.allExpenceIncome;
 
-      setRecords(data.data.allExpenceIncome);
+      setRecords(rec);
       // console.log(records);
 
       push("/dashboard");
@@ -41,6 +42,7 @@ export const Login = () => {
       setError(error.response.data);
     }
   };
+
   console.log(records);
   // console.log(handleSubmit.data.data);
 

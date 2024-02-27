@@ -35,7 +35,7 @@ const createIncomeExpencedate = async () => {
     id SERIAL PRIMARY KEY,
     amount TEXT NOT NULL,
     category TEXT NOT NULL,
-    date DATE NOT NULL,
+    date TEXT NOT NULL,
     time TIME NOT NULL,
     payee TEXT NOT NULL,
     note TEXT NOT NULL,
