@@ -75,9 +75,7 @@ function Record() {
 
                 <div className="text-gray-400">-35.000</div>
               </div>
-              <div>
-                <TodaysCatigory />
-              </div>
+              <div>{/* <TodaysCatigory /> */}</div>
               <div>
                 <YesterdaysCatigory />
               </div>

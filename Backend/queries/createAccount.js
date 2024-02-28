@@ -3,6 +3,7 @@ import { Makehash } from "../utils/passwordHash.js";
 import { client } from "/Users/23LP8204/Desktop/firstfullProject/Backend/index.js";
 
 const createUser = async (username, password, email, age) => {
+  await client.connect();
   const userCreateQuery = `
   INSERT INTO users(username, password, email, age)
   VALUES ($1, $2, $3, $4);
@@ -15,12 +16,14 @@ const createUser = async (username, password, email, age) => {
     age,
   ]);
 
+  await client.end();
   return iserId.rows[0];
 };
 const getUserQuery = async (email) => {
+  await client.connect();
   const loginUserQuery = `SELECT * FROM users WHERE email = $1`;
   const user = await client.query(loginUserQuery, [email]);
-
+  await client.end();
   return user.rows;
 };
 

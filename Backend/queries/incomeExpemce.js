@@ -9,6 +9,7 @@ const addIncomeExpense = async (
   types,
   email
 ) => {
+  await client.connect();
   const createIncomeExpenceTable = `INSERT INTO income_expense(amount,
         category,
         date,
@@ -27,6 +28,7 @@ const addIncomeExpense = async (
     types,
     email,
   ]);
+  await client.end();
   return clientIncomeExpence;
 };
 export const incomeExpense = async (req, res) => {

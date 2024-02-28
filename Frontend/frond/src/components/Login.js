@@ -12,7 +12,7 @@ export const Login = () => {
   const { records, setRecords } = useContext(IncomeExpenceContext);
 
   const { push } = useRouter();
-  const [userData, setuserData] = useState("");
+  const [userData, setuserData] = useState({});
   const [error, setError] = useState();
   const [passwordShown, setPasswordShown] = useState(false);
 
@@ -28,23 +28,19 @@ export const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const data = await axios.post("http://localhost:8000/login", userData);
+      const { data } = await axios.post(
+        "http://localhost:8000/login",
+        userData
+      );
+      console.log(data);
+      localStorage.setItem("Tokenn", data.token);
 
-      localStorage.setItem("Email", data.data.mail);
-      const rec = data.data.allExpenceIncome;
-
-      setRecords(rec);
-      // console.log(records);
-
-      push("/dashboard");
+      push("/");
     } catch (error) {
       console.log(error);
       setError(error.response.data);
     }
   };
-
-  console.log(records);
-  // console.log(handleSubmit.data.data);
 
   return (
     <div className="workSans">

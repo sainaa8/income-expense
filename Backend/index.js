@@ -25,7 +25,8 @@ const createYserTable = async () => {
     username TEXT NOT NULL,
     email TEXT NOT NULL,
     password TEXT NOT NULL,
-    age SMALLINT 
+    age SMALLINT,
+    cash TEXT
   )`;
   await client.query(query);
 };
@@ -45,17 +46,17 @@ const createIncomeExpencedate = async () => {
   await client.query(IncExp);
 };
 
-const dbinit = async () => {
-  await client.connect();
-  await createYserTable();
-  await createIncomeExpencedate();
-};
-dbinit();
-client.on("error", async (error, cl) => {
-  if (error) {
-    await client.connect();
-  }
-});
+// const dbinit = async () => {
+//   await client.connect();
+//   await createYserTable();
+//   await createIncomeExpencedate();
+// };
+// dbinit();
+// client.on("error", async (error, cl) => {
+//   if (error) {
+//     await client.connect();
+//   }
+// });
 // const createAddrecordTable = async () => {
 //   const addrecordq = `CREATE TABLE IF NOT EXISTS record (
 //     id SERIAL PRIMARY KEY,

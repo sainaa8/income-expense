@@ -5,7 +5,13 @@ import { LastRecord } from "./LastRecord";
 import { BarChart } from "./BarChart";
 import { Doghnut } from "./DughnutCart";
 import { Header } from "./Header";
+
+import { UserContext } from "./UserProvider";
+import { useContext } from "react";
+
 export const DashboardPage = () => {
+  const { userEmail } = useContext(UserContext);
+  console.log(userEmail);
   return (
     <div className="flex flex-col items-center ">
       <div>

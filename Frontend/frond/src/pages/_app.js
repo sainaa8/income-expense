@@ -9,17 +9,20 @@ const workSans = Work_Sans({
 import AddRecordProvider from "@/components/AddRecordProvider";
 import AddCatigoryProvider from "@/components/AddCatiProvider";
 import IncomeExpenceProvider from "@/components/ExpenceIncomeData";
+import { UserProvider } from "@/components/UserProvider";
 
 export default function App({ Component, pageProps }) {
   return (
     <main className={`${workSans.variable}`}>
-      <IncomeExpenceProvider>
-        <AddCatigoryProvider>
-          <AddRecordProvider>
-            <Component {...pageProps} />;
-          </AddRecordProvider>
-        </AddCatigoryProvider>
-      </IncomeExpenceProvider>
+      <UserProvider>
+        <IncomeExpenceProvider>
+          <AddCatigoryProvider>
+            <AddRecordProvider>
+              <Component {...pageProps} />;
+            </AddRecordProvider>
+          </AddCatigoryProvider>
+        </IncomeExpenceProvider>
+      </UserProvider>
     </main>
   );
 }

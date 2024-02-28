@@ -1,5 +1,5 @@
 import { MdHomeFilled } from "react-icons/md";
-import { PiForkKnifeFill } from "react-icons/pi";
+// import { PiForkKnifeFill } from "react-icons/pi";
 
 export const CatigoryType = (props) => {
   const { coor, icon, iCol, amount, cate, time } = props;
@@ -29,10 +29,14 @@ export const CatigoryType = (props) => {
 import { useContext } from "react";
 import { IncomeExpenceContext } from "./ExpenceIncomeData";
 import { useState, useEffect } from "react";
-import LazyResult from "postcss/lib/lazy-result";
-import { Lavishly_Yours } from "@next/font/google";
-import { FaLastfmSquare } from "react-icons/fa";
+// import LazyResult from "postcss/lib/lazy-result";
+// import { Lavishly_Yours } from "@next/font/google";
+// import { FaLastfmSquare } from "react-icons/fa";
 import { HiGift } from "react-icons/hi2";
+import { PiForkKnifeFill } from "react-icons/pi";
+import { FaTaxi } from "react-icons/fa6";
+import { BiSolidDrink } from "react-icons/bi";
+import { HiMiniShoppingCart } from "react-icons/hi2";
 
 export const TodaysCatigory = () => {
   const { records } = useContext(IncomeExpenceContext);
@@ -43,11 +47,11 @@ export const TodaysCatigory = () => {
   useEffect(() => {
     const lastRecord = records[records.length - 1];
     console.log(lastRecord);
-
     setDate(lastRecord.date);
+
     const las = records.filter((el) => el.date === date);
     setLastDays(las);
-  }, []);
+  }, [date]);
 
   console.log(date);
 
@@ -66,9 +70,20 @@ export const TodaysCatigory = () => {
               time={el.time}
               icon={
                 (el.category === "Home" && <MdHomeFilled />) ||
-                (el.category === "Gift" && <HiGift />)
+                (el.category === "Gift" && <HiGift />) ||
+                (el.category === "Food" && <PiForkKnifeFill />) ||
+                (el.category === "Taxi" && <FaTaxi />) ||
+                (el.category === "Drink" && <BiSolidDrink />) ||
+                (el.category === "Shopping" && <HiMiniShoppingCart />)
               }
-              iCol={el.category === "Home" && "bg-red-400"}
+              iCol={
+                (el.category === "Home" && "bg-blue-400") ||
+                (el.category === "Gift" && "bg-yellow-400") ||
+                (el.category === "Food" && "bg-red-400") ||
+                (el.category === "Taxi" && "bg-yellow-400") ||
+                (el.category === "Drink" && "bg-purple-400") ||
+                (wl.category === "Shopping" && "bg-purple-200")
+              }
               // iCol={el.category === "Food" && <PiForkKnifeFill />}
               // icon={el.icon}
               // iCol={el.iCol}
