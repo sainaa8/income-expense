@@ -41,6 +41,7 @@ export const Login = () => {
       localStorage.setItem("Tokenn", data.token);
       localStorage.setItem("Email", data.user.email);
       localStorage.setItem("UserCash", data.user.cash);
+      localStorage.setItem("name", data.user.username);
 
       push("/");
       location.reload();

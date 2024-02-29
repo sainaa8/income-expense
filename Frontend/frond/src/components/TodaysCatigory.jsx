@@ -36,14 +36,14 @@ export const TodaysCatigory = (props) => {
 
   const today = new Date();
   let yesterday = new Date(today);
-  yesterday.setDate(today.getDate() - 1);
+  yesterday.setDate(today.getDate());
   let day = yesterday.getDate();
   let month = yesterday.getMonth() + 1;
   let year = yesterday.getFullYear();
   let formattedMonth = month < 10 ? `0${month}` : month;
   let formattedDay = day < 10 ? `0${day}` : day;
   let currentDate = `${year}-${formattedMonth}-${formattedDay}`;
-  // console.log(currentDate);
+  console.log(currentDate);
 
   // console.log(records);
   const todaysRecords = records?.filter(

@@ -1,11 +1,26 @@
 import { Steps } from "./Steps";
 import { GiTwoCoins } from "react-icons/gi";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import axios from "axios";
+import { Login } from "./Login";
+
 export const SingUpSecond = (props) => {
+  const [upCash, setUpCash] = useState("");
   const { stage = 2 } = props;
   const { push } = useRouter();
-  const handleClick = () => {
-    push("/sign3");
+
+  const handleClick = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post("http://localhost:8000/userUpdate", {
+        cash: upCash,
+      });
+      console.log(data);
+      push("/sign3");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="flex flex-col mt-[100px] items-center gap-[170px] ">
@@ -19,7 +34,12 @@ export const SingUpSecond = (props) => {
         </div>
         <div className="flex flex-col gap-[10px]">
           <div className="w-[500px] h-[64px] bg-gray-100 pl-[20px] text-[20px] flex items-center rounded-2xl">
-            <input placeholder="Email" className="bg-gray-100  outline-none" />
+            <input
+              onChange={(el) => setUpCash(el.target.value)}
+              type="number"
+              placeholder="Cash Balance"
+              className="bg-gray-100  outline-none"
+            />
           </div>{" "}
           <div className="text-[14px] text-gray-500 w-[500px] ">
             How much cash do you have in your wallet?

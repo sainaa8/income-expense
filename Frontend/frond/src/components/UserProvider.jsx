@@ -8,11 +8,13 @@ export const UserProvider = ({ children }) => {
   const [userEmail, setUser] = useState("");
   const [records, setRecords] = useState();
   const [cash, setCash] = useState();
+  const [nam, setname] = useState();
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("Tokenn");
     const cash = localStorage.getItem("UserCash");
+    const username = localStorage.getItem("name");
 
     if (!token) {
       router.push("/login");
@@ -34,6 +36,7 @@ export const UserProvider = ({ children }) => {
 
         setUser(result.data);
         setCash(cash);
+        setname(username);
         // router.push("/");
       } catch (err) {
         console.log(err);
@@ -44,7 +47,7 @@ export const UserProvider = ({ children }) => {
     getUserToken();
   }, []);
 
-  console.log(cash);
+  console.log(nam);
 
   useEffect(() => {
     const getRecords = async () => {
@@ -61,7 +64,7 @@ export const UserProvider = ({ children }) => {
   }, [userEmail]);
   console.log(records);
   return (
-    <UserContext.Provider value={{ userEmail, records, cash }}>
+    <UserContext.Provider value={{ userEmail, records, cash, nam }}>
       {children}
     </UserContext.Provider>
   );

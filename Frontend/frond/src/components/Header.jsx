@@ -10,6 +10,8 @@ import { LastCatigory } from "./LASTaddCatigory";
 
 import { AddCatigoryContext } from "./AddCatiProvider";
 
+import { UserContext } from "./UserProvider";
+
 export const Header = () => {
   const { push } = useRouter();
   const [bold, setBold] = useState(true);
@@ -17,6 +19,9 @@ export const Header = () => {
   const { record, setRecord } = useContext(AddRecordContext);
 
   const { addCati, setAddCati } = useContext(AddCatigoryContext);
+
+  const { nam } = useContext(UserContext);
+  console.log(nam);
 
   const handleRecord = () => {
     setBold(false);
@@ -67,6 +72,7 @@ export const Header = () => {
             >
               Records
             </div>
+            <div>{nam}</div>
           </div>
           <div className="flex  gap-[24px] items-center">
             <div className="bg-blue-500 px-[15px] py-[5px] h-fit w-fit rounded-[30px] ">
