@@ -104,9 +104,7 @@ function Record() {
               <div>
                 <TodaysCatigory records={records} />
               </div>
-              <div>
-                <YesterdaysCatigory />
-              </div>
+              <div><YesterdaysCatigory records={records} /></div>
             </div>
           </div>
         </div>

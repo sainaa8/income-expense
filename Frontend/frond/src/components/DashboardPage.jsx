@@ -7,14 +7,44 @@ import { Doghnut } from "./DughnutCart";
 import { Header } from "./Header";
 
 import { UserContext } from "./UserProvider";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
+import { useState } from "react";
+// import { inExContext } from "./inExProvider";
 
 export const DashboardPage = () => {
-  const { userEmail } = useContext(UserContext);
-  // console.log(userEmail);
-  // useEffect(() => {
-  //   // location.reload();
-  // }, [userEmail]);
+  const { records, cash } = useContext(UserContext);
+  // const { inc, setInc } = useContext(inExContext);
+  console.log(cash);
+
+  let ex = [];
+  let incom = [];
+
+  console.log(records);
+  // console.log(records[records?.length - 1]);
+  const income = records?.filter((item) => item.types === "income");
+  const expense = records?.filter((item) => item.types === "expence");
+  console.log(income);
+  console.log(expense);
+
+  for (let i = 0; i < expense?.length; i++) {
+    const amount = Number(expense[i].amount);
+    ex.push(amount);
+  }
+  const sumexp = ex.reduce((a, b) => a + b, 0);
+  const moneyExp = sumexp.toLocaleString();
+
+  for (let i = 0; i < income?.length; i++) {
+    const amountInc = Number(income[i].amount);
+    incom.push(amountInc);
+  }
+  const sumInc = incom.reduce((a, b) => a + b, 0);
+  const moneyInc = sumInc.toLocaleString();
+  //
+  // console.log(cash - sumexp + sumInc);
+  let myCash = cash - sumexp + sumInc;
+  console.log(myCash);
+  const allMyMoney = myCash.toLocaleString();
+  console.log(allMyMoney);
   return (
     <div className="flex flex-col items-center ">
       <div>
@@ -23,16 +53,26 @@ export const DashboardPage = () => {
       <div className="workSans">
         <div className="px-[20px] py-[33px] flex flex-col gap-[24px]  bg-gray-100">
           <div className="flex gap-[30px]">
-            <MyCard />
-            <MyIncome />
-            <MyIncome />
+            <MyCard allMyMoney={allMyMoney} />
+            <MyIncome
+              header="My Income"
+              decs="Your income amount"
+              dotColor="text-green-500"
+              amount={moneyInc}
+            />
+            <MyIncome
+              header="My Expense"
+              decs="Your expense amount"
+              dotColor="text-blue-500"
+              amount={moneyExp}
+            />
           </div>
           <div className="flex gap-[30px]">
-            <BarChart />
+            <BarChart sumInc={sumInc} />
             <Doghnut />
           </div>
           <div>
-            <LastRecord />
+            <LastRecord records={records} />
           </div>
         </div>
       </div>

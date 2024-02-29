@@ -1,6 +1,7 @@
 import { BarChartComp } from "./BarChartdata";
-export const BarChart = () => {
- 
+export const BarChart = (props) => {
+  const { sumInc } = props;
+
   return (
     <div className="workSans">
       <div className="w-[700px]  bg-white rounded-[12px]">
@@ -10,9 +11,7 @@ export const BarChart = () => {
           </div>
         </div>
         <div className="w-[660px] h-[318px] flex justify-center items-center ">
-       
-          <BarChartComp/>
-      
+          <BarChartComp sumInc={sumInc} />
         </div>
       </div>
     </div>

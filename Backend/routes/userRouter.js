@@ -8,6 +8,7 @@ import { addRecordIncomeController } from "../controllers/userController.js";
 import { IncomeExpenseQuery } from "../controllers/userController.js";
 import { GetUserController } from "../controllers/userController.js";
 import { getIncomeExpenceController } from "../controllers/userController.js";
+import { userUpdateController } from "../controllers/userController.js";
 
 const userRouter = express.Router();
 
@@ -19,4 +20,5 @@ userRouter.post("/addRecordIncome", addRecordIncomeController);
 userRouter.post("/incomeExpence", IncomeExpenseQuery);
 userRouter.post("/getUser", GetUserController);
 userRouter.post("/getIncomeExpence", getIncomeExpenceController);
+userRouter.post("/userUpdate", userUpdateController);
 export default userRouter;

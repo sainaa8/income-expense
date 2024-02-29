@@ -1,5 +1,6 @@
 import Image from "next/image";
-export const MyCard = () => {
+export const MyCard = (props) => {
+  const { allMyMoney } = props;
   return (
     <div>
       <div className="relative">
@@ -17,7 +18,7 @@ export const MyCard = () => {
         <div className="absolute bottom-[32px] left-[32px] index-10 flex flex-col gap-[3px] index-10">
           <div className="text-[16px] text-slate-200 font-normal">Cash</div>
           <div className="text-white text-[24px] font-semibold">
-            10,000,000,00
+            {allMyMoney} ₮
           </div>
         </div>
       </div>

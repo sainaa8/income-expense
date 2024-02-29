@@ -40,6 +40,7 @@ export const Login = () => {
       console.log(data);
       localStorage.setItem("Tokenn", data.token);
       localStorage.setItem("Email", data.user.email);
+      localStorage.setItem("UserCash", data.user.cash);
 
       push("/");
       location.reload();

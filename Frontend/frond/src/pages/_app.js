@@ -10,10 +10,12 @@ import AddRecordProvider from "@/components/AddRecordProvider";
 import AddCatigoryProvider from "@/components/AddCatiProvider";
 import IncomeExpenceProvider from "@/components/ExpenceIncomeData";
 import { UserProvider } from "@/components/UserProvider";
+// import { InExProvider } from "@/components/inExProvider";
 
 export default function App({ Component, pageProps }) {
   return (
     <main className={`${workSans.variable}`}>
+      {/* <InExProvider> */}
       <UserProvider>
         <IncomeExpenceProvider>
           <AddCatigoryProvider>
@@ -23,6 +25,7 @@ export default function App({ Component, pageProps }) {
           </AddCatigoryProvider>
         </IncomeExpenceProvider>
       </UserProvider>
+      {/* </InExProvider> */}
     </main>
   );
 }

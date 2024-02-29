@@ -1,4 +1,3 @@
-import { MdHomeFilled } from "react-icons/md";
 // import { PiForkKnifeFill } from "react-icons/pi";
 
 export const CatigoryType = (props) => {
@@ -25,13 +24,7 @@ export const CatigoryType = (props) => {
     </div>
   );
 };
-
-import { useContext } from "react";
-// import { IncomeExpenceContext } from "./ExpenceIncomeData";
-import { useState, useEffect } from "react";
-// import LazyResult from "postcss/lib/lazy-result";
-// import { Lavishly_Yours } from "@next/font/google";
-// import { FaLastfmSquare } from "react-icons/fa";
+import { MdHomeFilled } from "react-icons/md";
 import { HiGift } from "react-icons/hi2";
 import { PiForkKnifeFill } from "react-icons/pi";
 import { FaTaxi } from "react-icons/fa6";
@@ -41,38 +34,28 @@ import { HiMiniShoppingCart } from "react-icons/hi2";
 export const TodaysCatigory = (props) => {
   const { records } = props;
 
-  const [date, setDate] = useState();
-  const [LastDays, setLastDays] = useState([]);
-
   const today = new Date();
+  let yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+  let day = yesterday.getDate();
+  let month = yesterday.getMonth() + 1;
+  let year = yesterday.getFullYear();
+  let formattedMonth = month < 10 ? `0${month}` : month;
+  let formattedDay = day < 10 ? `0${day}` : day;
+  let currentDate = `${year}-${formattedMonth}-${formattedDay}`;
+  // console.log(currentDate);
 
-  let day = today.getDate();
-  let month = today.getMonth() + 1;
-  let year = today.getFullYear();
-  let currentDate = `${year}-${month}-${day}`;
-  console.log(currentDate);
-  console.log(records);
-  const todaysRecords = records?.filter((el) => el.date === currentDate);
-  console.log(todaysRecords);
-  // console.log(today);
-  // setDate(lastRecord.date);
-  // const las = records.filter((el) => el.date === date);
-
-  // useEffect(() => {
-  // const lastRecord = records[records.length - 1];
-  // console.log(lastRecord);
-  //   setDate(lastRecord.date);
-
-  //   setLastDays(las);
-  // }, [date]);
-
-  console.log(date);
+  // console.log(records);
+  const todaysRecords = records?.filter(
+    (el) => el.created_at.split("T")[0] === currentDate
+  );
+  // console.log(todaysRecords);
 
   return (
     <div className="workSans">
       <div className="text-[24px] font-semibold mb-[12px]">Today</div>
       <div className="flex flex-col gap-[10px]">
-        {records?.slice(0, 5).map((el, id) => (
+        {todaysRecords?.slice(0, 5).map((el, id) => (
           <div key={id}>
             <CatigoryType
               coor={el.types === "expence" ? "text-red-500" : "text-green-500"}
@@ -95,9 +78,6 @@ export const TodaysCatigory = (props) => {
                 (el.category === "Drink" && "bg-purple-400") ||
                 (wl.category === "Shopping" && "bg-purple-200")
               }
-              // iCol={el.category === "Food" && <PiForkKnifeFill />}
-              // icon={el.icon}
-              // iCol={el.iCol}
             />
           </div>
         ))}

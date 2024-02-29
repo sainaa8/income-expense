@@ -1,46 +1,63 @@
 import { CatigoryType } from "./TodaysCatigory";
 
-import { PiForkKnifeFill } from "react-icons/pi";
+// import { PiForkKnifeFill } from "react-icons/pi";
 
-export const YesterdaysCatigory = () => {
-  const gain = [
-    {
-      icon: <PiForkKnifeFill />,
-      iCol: "bg-red-500",
-      col: "text-orange-300",
-    },
-    {
-      icon: <PiForkKnifeFill />,
-      iCol: "bg-red-500",
-      col: "text-orange-300",
-    },
-    {
-      icon: <PiForkKnifeFill />,
-      iCol: "bg-red-500",
-      col: "text-orange-300",
-    },
-    {
-      icon: <PiForkKnifeFill />,
-      iCol: "bg-red-500",
-      col: "text-orange-300",
-    },
-    {
-      icon: <PiForkKnifeFill />,
-      iCol: "bg-red-500",
-      col: "text-orange-300",
-    },
-  ];
+import { MdHomeFilled } from "react-icons/md";
+import { HiGift } from "react-icons/hi2";
+import { PiForkKnifeFill } from "react-icons/pi";
+import { FaTaxi } from "react-icons/fa6";
+import { BiSolidDrink } from "react-icons/bi";
+import { HiMiniShoppingCart } from "react-icons/hi2";
+
+export const YesterdaysCatigory = (props) => {
+  const { records } = props;
+
+  const today = new Date();
+  let yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+  let day = yesterday.getDate() - 1;
+  let month = yesterday.getMonth() + 1;
+  let year = yesterday.getFullYear();
+  let formattedMonth = month < 10 ? `0${month}` : month;
+  let formattedDay = day < 10 ? `0${day}` : day;
+  let currentDate = `${year}-${formattedMonth}-${formattedDay}`;
+  console.log(currentDate);
+
+  console.log(records);
+  const yeaterdaysRecords = records?.filter(
+    (el) => el.created_at.split("T")[0] === currentDate
+  );
+  console.log(yeaterdaysRecords);
+
   return (
     <div className="workSans">
-      <div className="text-[24px] font-semibold mb-[12px]">Yesterday</div>
+      <div className="text-[24px] font-semibold mb-[12px]">Yesterdsay</div>
       <div className="flex flex-col gap-[10px]">
-        {gain.map((item, index) => (
-          <CatigoryType
-            key={index}
-            icon={item.icon}
-            iCol={item.iCol}
-            coor={item.col}
-          />
+        {yeaterdaysRecords?.slice(0, 5).map((el, id) => (
+          <div key={id}>
+            <CatigoryType
+              coor={el.types === "expence" ? "text-red-500" : "text-green-500"}
+              amount={el.amount}
+              cate={el.category}
+              time={el.time}
+              icon={
+                (el.category === "Home" && <MdHomeFilled />) ||
+                (el.category === "Gift" && <HiGift />) ||
+                (el.category === "Food" && <PiForkKnifeFill />) ||
+                (el.category === "Taxi" && <FaTaxi />) ||
+                (el.category === "Drink" && <BiSolidDrink />) ||
+                (el.category === "Shopping" && <HiMiniShoppingCart />)
+              }
+              iCol={
+                (el.category === "Home" && "bg-blue-400") ||
+                (el.category === "Gift" && "bg-yellow-400") ||
+                (el.category === "Food" && "bg-red-400") ||
+                (el.category === "Taxi" && "bg-yellow-400") ||
+                (el.category === "Drink" && "bg-purple-400") ||
+                (wl.category === "Shopping" && "bg-purple-200")
+              }
+            />
+          </div>
         ))}
       </div>
     </div>

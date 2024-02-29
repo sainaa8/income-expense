@@ -5,6 +5,7 @@ import { AddRecordIncome } from "../queries/addRecordIncome.js";
 import { incomeExpense } from "../queries/incomeExpemce.js";
 import { GetUser } from "../queries/getUser.js";
 import { getIncomeExpence } from "../queries/GetIncomeExpence.js";
+import { userUpdate } from "../queries/UpdateUser.js";
 
 export const getLogin = async (req, res) => {
   try {
@@ -63,6 +64,15 @@ export const getIncomeExpenceController = async (req, res) => {
   try {
     const userTempce = await getIncomeExpence(req);
     res.send(userTempce);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+export const userUpdateController = async (req, res) => {
+  try {
+    const updateTempce = await userUpdate(req);
+    res.send(updateTempce);
   } catch (err) {
     res.status(500).send(err.message);
   }
