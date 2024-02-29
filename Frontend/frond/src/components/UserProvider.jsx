@@ -5,7 +5,8 @@ import axios from "axios";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [userEmail, setUser] = useState();
+  const [userEmail, setUser] = useState("");
+  const [records, setRecords] = useState();
   const router = useRouter();
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export const UserProvider = ({ children }) => {
 
     const getUserToken = async () => {
       try {
-        const { email } = await axios.post(
+        const result = await axios.post(
           "http://localhost:8000/getUser",
           {},
           {
@@ -28,20 +29,34 @@ export const UserProvider = ({ children }) => {
           }
         );
 
-        setUser(email);
-        console.log(email);
-        router.push("/");
+        setUser(result.data);
+
+        // router.push("/");
       } catch (err) {
         console.log(err);
-        // localStorage.removeItem("Tokenn");
+        localStorage.removeItem("Tokenn");
         router.push("/login");
       }
     };
     getUserToken();
   }, []);
 
+  useEffect(() => {
+    const getRecords = async () => {
+      const { data } = await axios.post(
+        "http://localhost:8000/getIncomeExpence",
+        {
+          email: userEmail,
+        }
+      );
+
+      setRecords(data);
+    };
+    getRecords();
+  }, [userEmail]);
+  console.log(records);
   return (
-    <UserContext.Provider value={{ userEmail }}>
+    <UserContext.Provider value={{ userEmail, records }}>
       {children}
     </UserContext.Provider>
   );

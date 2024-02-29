@@ -15,7 +15,7 @@ export const Header = () => {
   const [bold, setBold] = useState(true);
 
   const { record, setRecord } = useContext(AddRecordContext);
-  
+
   const { addCati, setAddCati } = useContext(AddCatigoryContext);
 
   const handleRecord = () => {
@@ -31,7 +31,7 @@ export const Header = () => {
 
   const handlePushdash = () => {
     setBold(true);
-    push("/dashboard");
+    push("/");
     setRecord(false);
   };
 

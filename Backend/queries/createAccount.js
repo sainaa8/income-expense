@@ -3,7 +3,7 @@ import { Makehash } from "../utils/passwordHash.js";
 import { client } from "/Users/23LP8204/Desktop/firstfullProject/Backend/index.js";
 
 const createUser = async (username, password, email, age) => {
-  await client.connect();
+
   const userCreateQuery = `
   INSERT INTO users(username, password, email, age)
   VALUES ($1, $2, $3, $4);
@@ -16,16 +16,16 @@ const createUser = async (username, password, email, age) => {
     age,
   ]);
 
-  await client.end();
-  return iserId.rows[0];
+ 
+  return iserId.rows;
 };
-const getUserQuery = async (email) => {
-  await client.connect();
-  const loginUserQuery = `SELECT * FROM users WHERE email = $1`;
-  const user = await client.query(loginUserQuery, [email]);
-  await client.end();
-  return user.rows;
-};
+// const getUserQuery = async (email) => {
+//   await client.connect();
+//   const loginUserQuery = `SELECT * FROM users WHERE email = $1`;
+//   const user = await client.query(loginUserQuery, [email]);
+//   await client.end();
+//   return user.rows;
+// };
 
 export const CreateNewUser = async (req, res) => {
   const { username, password, email, age } = req.body;
@@ -34,21 +34,22 @@ export const CreateNewUser = async (req, res) => {
     if (!username || !email || !password) {
       return "Something is missing";
     }
-    const userscheck = await getUserQuery(email);
-    console.log(userscheck);
-    if (userscheck.length > 0) {
-      console.log("user already exist");
-      return "User already exist";
-    }
+    // const userscheck = await getUserQuery(email);
+    // console.log(userscheck);
+    // if (userscheck.length > 0) {
+    //   console.log("user already exist");
+    //   return "User already exist";
+    // }
 
     const users = await createUser(username, password, email, age);
-
     console.log(users);
-    await client.end();
+
+    // console.log(users);
+
     return "succsess";
   } catch (err) {
     console.log();
-    err.message;
+    res.send(500).send(err.message);
   }
 };
 

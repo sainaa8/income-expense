@@ -6,10 +6,12 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 import { useContext } from "react";
-import { IncomeExpenceContext } from "./ExpenceIncomeData";
+// import { IncomeExpenceContext } from "./ExpenceIncomeData";
+import { UserContext } from "./UserProvider";
 
 export const Login = () => {
-  const { records, setRecords } = useContext(IncomeExpenceContext);
+  // const { records, setRecords } = ueContext);seContext(IncomeExpenc
+  const { userEmail } = useContext(UserContext);
 
   const { push } = useRouter();
   const [userData, setuserData] = useState({});
@@ -25,6 +27,9 @@ export const Login = () => {
     push("/create");
   };
 
+  if (userEmail) {
+    push("/");
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -34,8 +39,10 @@ export const Login = () => {
       );
       console.log(data);
       localStorage.setItem("Tokenn", data.token);
+      localStorage.setItem("Email", data.user.email);
 
       push("/");
+      location.reload();
     } catch (error) {
       console.log(error);
       setError(error.response.data);

@@ -7,11 +7,14 @@ import { Doghnut } from "./DughnutCart";
 import { Header } from "./Header";
 
 import { UserContext } from "./UserProvider";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export const DashboardPage = () => {
   const { userEmail } = useContext(UserContext);
-  console.log(userEmail);
+  // console.log(userEmail);
+  // useEffect(() => {
+  //   // location.reload();
+  // }, [userEmail]);
   return (
     <div className="flex flex-col items-center ">
       <div>

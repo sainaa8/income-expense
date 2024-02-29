@@ -27,7 +27,7 @@ export const CatigoryType = (props) => {
 };
 
 import { useContext } from "react";
-import { IncomeExpenceContext } from "./ExpenceIncomeData";
+// import { IncomeExpenceContext } from "./ExpenceIncomeData";
 import { useState, useEffect } from "react";
 // import LazyResult from "postcss/lib/lazy-result";
 // import { Lavishly_Yours } from "@next/font/google";
@@ -38,30 +38,41 @@ import { FaTaxi } from "react-icons/fa6";
 import { BiSolidDrink } from "react-icons/bi";
 import { HiMiniShoppingCart } from "react-icons/hi2";
 
-export const TodaysCatigory = () => {
-  const { records } = useContext(IncomeExpenceContext);
+export const TodaysCatigory = (props) => {
+  const { records } = props;
+
   const [date, setDate] = useState();
   const [LastDays, setLastDays] = useState([]);
+
+  const today = new Date();
+
+  let day = today.getDate();
+  let month = today.getMonth() + 1;
+  let year = today.getFullYear();
+  let currentDate = `${year}-${month}-${day}`;
+  console.log(currentDate);
   console.log(records);
+  const todaysRecords = records?.filter((el) => el.date === currentDate);
+  console.log(todaysRecords);
+  // console.log(today);
+  // setDate(lastRecord.date);
+  // const las = records.filter((el) => el.date === date);
 
-  useEffect(() => {
-    const lastRecord = records[records.length - 1];
-    console.log(lastRecord);
-    setDate(lastRecord.date);
+  // useEffect(() => {
+  // const lastRecord = records[records.length - 1];
+  // console.log(lastRecord);
+  //   setDate(lastRecord.date);
 
-    const las = records.filter((el) => el.date === date);
-    setLastDays(las);
-  }, [date]);
+  //   setLastDays(las);
+  // }, [date]);
 
   console.log(date);
 
-  console.log(LastDays);
-
   return (
     <div className="workSans">
-      <div className="text-[24px] font-semibold mb-[12px]">{date}</div>
+      <div className="text-[24px] font-semibold mb-[12px]">Today</div>
       <div className="flex flex-col gap-[10px]">
-        {LastDays.slice(-6, -1).map((el, id) => (
+        {records?.slice(0, 5).map((el, id) => (
           <div key={id}>
             <CatigoryType
               coor={el.types === "expence" ? "text-red-500" : "text-green-500"}

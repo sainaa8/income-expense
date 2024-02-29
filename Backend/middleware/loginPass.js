@@ -1,13 +1,13 @@
 import jwt from "jsonwebtoken";
 
 import { compareHash } from "../utils/passwordHash.js";
-import { client } from "/Users/23LP8204/Desktop/firstfullProject/Backend/index.js";
+// import { client } from "/Users/23LP8204/Desktop/firstfullProject/Backend/index.js";
+import { client } from "../index.js";
 
 const getUserQuery = async (email) => {
-  await client.connect();
   const loginUserQuery = `SELECT * FROM users WHERE email = $1`;
   const user = await client.query(loginUserQuery, [email]);
-  await client.end();
+
   return user.rows[0];
 };
 

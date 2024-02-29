@@ -8,14 +8,40 @@ import { IoIosArrowForward } from "react-icons/io";
 import { TodaysCatigory } from "@/components/TodaysCatigory";
 import { YesterdaysCatigory } from "@/components/YesterdaysCatigory";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AddRecordContext } from "@/components/AddRecordProvider";
+import { UserContext } from "@/components/UserProvider";
+
 import { Header } from "@/components/Header";
+
+import axios from "axios";
+
 function Record() {
   const { record, setRecord } = useContext(AddRecordContext);
+  const { userEmail, records } = useContext(UserContext);
+  console.log(userEmail);
+  console.log(records);
   const handleRecord = () => {
     setRecord(!record);
   };
+
+  // useEffect(() => {
+  //   const userData = async (event) => {
+  //     event.preventDefault();
+  //     try {
+  //       const { data } = await axios.get(
+  //         "http://localhost:8000/getIncomeExpence",
+  //         userEmail
+  //       );
+  //       console.log(data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   userData();
+  // }, []);
+  //
+
   return (
     <div className="workSans">
       <div className="flex flex-col items-center">
@@ -75,7 +101,9 @@ function Record() {
 
                 <div className="text-gray-400">-35.000</div>
               </div>
-              <div>{/* <TodaysCatigory /> */}</div>
+              <div>
+                <TodaysCatigory records={records} />
+              </div>
               <div>
                 <YesterdaysCatigory />
               </div>

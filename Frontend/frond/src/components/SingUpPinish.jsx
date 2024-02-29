@@ -5,7 +5,7 @@ export const SingUpPinish = (props) => {
   const { stage = 3 } = props;
   const { push } = useRouter();
   const handleClick = () => {
-    push("/");
+    push("/login");
   };
   return (
     <div className="flex flex-col mt-[100px] items-center gap-[170px]">

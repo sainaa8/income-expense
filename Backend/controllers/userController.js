@@ -4,6 +4,7 @@ import { AddRecordQuery } from "../queries/addrecord.js";
 import { AddRecordIncome } from "../queries/addRecordIncome.js";
 import { incomeExpense } from "../queries/incomeExpemce.js";
 import { GetUser } from "../queries/getUser.js";
+import { getIncomeExpence } from "../queries/GetIncomeExpence.js";
 
 export const getLogin = async (req, res) => {
   try {
@@ -15,10 +16,10 @@ export const getLogin = async (req, res) => {
   }
 };
 
-export const getCreate = async (req, res) => {
+export const Create = async (req, res) => {
   try {
-    const tempCe = await CreateNewUser(req);
-    res.send(tempCe);
+    const temp = await CreateNewUser(req);
+    res.send(temp);
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -53,6 +54,15 @@ export const GetUserController = async (req, res) => {
   try {
     const temCe = await GetUser(req);
     res.send(temCe);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+export const getIncomeExpenceController = async (req, res) => {
+  try {
+    const userTempce = await getIncomeExpence(req);
+    res.send(userTempce);
   } catch (err) {
     res.status(500).send(err.message);
   }

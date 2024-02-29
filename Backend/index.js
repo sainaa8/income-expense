@@ -41,22 +41,23 @@ const createIncomeExpencedate = async () => {
     payee TEXT NOT NULL,
     note TEXT NOT NULL,
     types TEXT NOT NULL,
-    email TEXT NOT NULL
+    email TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
   )`;
   await client.query(IncExp);
 };
 
-// const dbinit = async () => {
-//   await client.connect();
-//   await createYserTable();
-//   await createIncomeExpencedate();
-// };
-// dbinit();
-// client.on("error", async (error, cl) => {
-//   if (error) {
-//     await client.connect();
-//   }
-// });
+const dbinit = async () => {
+  await client.connect();
+  await createYserTable();
+  await createIncomeExpencedate();
+};
+dbinit();
+client.on("error", async (error, cl) => {
+  if (error) {
+    await client.connect();
+  }
+});
 // const createAddrecordTable = async () => {
 //   const addrecordq = `CREATE TABLE IF NOT EXISTS record (
 //     id SERIAL PRIMARY KEY,

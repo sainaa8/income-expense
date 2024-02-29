@@ -6,18 +6,18 @@ import { compareHash } from "../utils/passwordHash.js";
 import { client } from "/Users/23LP8204/Desktop/firstfullProject/Backend/index.js";
 
 const getExpenceIncomeTable = async (email) => {
-  await client.connect();
+
   const allExpenceIncomeQuery = `SELECT * FROM income_expense WHERE email = $1`;
   const expenceIncome = await client.query(allExpenceIncomeQuery, [email]);
-  await client.end();
+ 
   return expenceIncome.rows;
 };
 
 const getUserQuery = async (email) => {
-  await client.connect();
+ 
   const loginUserQuery = `SELECT * FROM users WHERE email = $1`;
   const user = await client.query(loginUserQuery, [email]);
-  await client.end();
+  
   return user.rows;
 };
 
