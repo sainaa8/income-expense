@@ -153,7 +153,6 @@ export const AddRecord = () => {
               </div>
             </div>
           </div>
-          asdads
         </form>
         {error && <div className="text-red-500">{error}</div>}
       </div>

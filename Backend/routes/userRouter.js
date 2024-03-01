@@ -9,7 +9,7 @@ import { IncomeExpenseQuery } from "../controllers/userController.js";
 import { GetUserController } from "../controllers/userController.js";
 import { getIncomeExpenceController } from "../controllers/userController.js";
 import { userUpdateController } from "../controllers/userController.js";
-
+import { getIcomeOnlyController } from "../controllers/userController.js";
 const userRouter = express.Router();
 
 userRouter.post("/login", MiddlewareOfLogin, getLogin);
@@ -21,4 +21,5 @@ userRouter.post("/incomeExpence", IncomeExpenseQuery);
 userRouter.post("/getUser", GetUserController);
 userRouter.post("/getIncomeExpence", getIncomeExpenceController);
 userRouter.post("/userUpdate", userUpdateController);
+userRouter.post("/getIcomeOnly", getIcomeOnlyController);
 export default userRouter;

@@ -9,8 +9,13 @@ import { FaTaxi } from "react-icons/fa6";
 import { BiSolidDrink } from "react-icons/bi";
 import { HiMiniShoppingCart } from "react-icons/hi2";
 
+import { useContext } from "react";
+import { mapdataContext } from "./MapDataProvider";
+
 export const YesterdaysCatigory = (props) => {
   const { records } = props;
+
+  const { mapdata, setMapdata } = useContext(mapdataContext);
 
   const today = new Date();
   let yesterday = new Date(today);
@@ -24,7 +29,7 @@ export const YesterdaysCatigory = (props) => {
   console.log(currentDate);
 
   console.log(records);
-  const yeaterdaysRecords = records?.filter(
+  const yeaterdaysRecords = mapdata?.filter(
     (el) => el.created_at.split("T")[0] === currentDate
   );
   console.log(yeaterdaysRecords);

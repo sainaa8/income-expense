@@ -2,6 +2,7 @@
 
 export const CatigoryType = (props) => {
   const { coor, icon, iCol, amount, cate, time } = props;
+
   return (
     <div>
       <div className="bg-white rounded-lg w-[950px] flex justify-between items-center border border-gray-300 ">
@@ -31,12 +32,17 @@ import { FaTaxi } from "react-icons/fa6";
 import { BiSolidDrink } from "react-icons/bi";
 import { HiMiniShoppingCart } from "react-icons/hi2";
 
+import { useContext } from "react";
+import { mapdataContext } from "./MapDataProvider";
+
 export const TodaysCatigory = (props) => {
   const { records } = props;
 
+  const { mapdata, setMapdata } = useContext(mapdataContext);
+
   const today = new Date();
   let yesterday = new Date(today);
-  yesterday.setDate(today.getDate());
+  yesterday.setDate(today.getDate() - 1);
   let day = yesterday.getDate();
   let month = yesterday.getMonth() + 1;
   let year = yesterday.getFullYear();
@@ -46,7 +52,7 @@ export const TodaysCatigory = (props) => {
   console.log(currentDate);
 
   // console.log(records);
-  const todaysRecords = records?.filter(
+  const todaysRecords = mapdata?.filter(
     (el) => el.created_at.split("T")[0] === currentDate
   );
   // console.log(todaysRecords);

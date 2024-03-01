@@ -9,6 +9,8 @@ export const UserProvider = ({ children }) => {
   const [records, setRecords] = useState();
   const [cash, setCash] = useState();
   const [nam, setname] = useState();
+  const [temp, setTemp] = useState();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -59,12 +61,26 @@ export const UserProvider = ({ children }) => {
       );
 
       setRecords(data);
+      setTemp(data);
     };
     getRecords();
   }, [userEmail]);
+
+  const all = () => {
+    setRecords(temp);
+  };
   console.log(records);
   return (
-    <UserContext.Provider value={{ userEmail, records, cash, nam }}>
+    <UserContext.Provider
+      value={{
+        userEmail,
+        records,
+        cash,
+        nam,
+        setRecords,
+        all,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

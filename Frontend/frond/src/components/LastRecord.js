@@ -40,7 +40,7 @@ export const LastRecord = (props) => {
           </div>
         </div>
         <div>
-          {records?.map((el, index) => (
+          {records?.slice(0, 10).map((el, index) => (
             <div key={index}>
               <CatigoryType
                 coor={

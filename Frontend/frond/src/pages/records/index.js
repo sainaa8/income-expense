@@ -25,23 +25,6 @@ function Record() {
     setRecord(!record);
   };
 
-  // useEffect(() => {
-  //   const userData = async (event) => {
-  //     event.preventDefault();
-  //     try {
-  //       const { data } = await axios.get(
-  //         "http://localhost:8000/getIncomeExpence",
-  //         userEmail
-  //       );
-  //       console.log(data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   userData();
-  // }, []);
-  //
-
   return (
     <div className="workSans">
       <div className="flex flex-col items-center">
@@ -104,7 +87,9 @@ function Record() {
               <div>
                 <TodaysCatigory records={records} />
               </div>
-              <div><YesterdaysCatigory records={records} /></div>
+              <div>
+                <YesterdaysCatigory records={records} />
+              </div>
             </div>
           </div>
         </div>

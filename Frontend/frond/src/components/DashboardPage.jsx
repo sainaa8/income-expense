@@ -68,7 +68,7 @@ export const DashboardPage = () => {
             />
           </div>
           <div className="flex gap-[30px]">
-            <BarChart sumInc={sumInc} />
+            <BarChart sumInc={sumInc} sumexp={sumexp} />
             <Doghnut />
           </div>
           <div>
