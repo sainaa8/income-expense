@@ -7,6 +7,7 @@ import { GetUser } from "../queries/getUser.js";
 import { getIncomeExpence } from "../queries/GetIncomeExpence.js";
 import { userUpdate } from "../queries/UpdateUser.js";
 import { getIcomeOnly } from "../queries/getIncomeData.js";
+import { getCategoryDataQuery } from "../queries/CategoryData.js";
 
 export const getLogin = async (req, res) => {
   try {
@@ -79,11 +80,20 @@ export const userUpdateController = async (req, res) => {
   }
 };
 
-export const getIcomeOnlyController= async (req, res)=>{
-  try{
+export const getIcomeOnlyController = async (req, res) => {
+  try {
     const tempI = await getIcomeOnly(req);
     res.send(tempI);
-  }catch(err){
+  } catch (err) {
     res.status(500).send(err.message);
   }
-}
+};
+
+export const getCategoryDtaaController = async (req, res) => {
+  try {
+    const tempCa = await getCategoryDataQuery(req);
+    res.send(tempCa);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};

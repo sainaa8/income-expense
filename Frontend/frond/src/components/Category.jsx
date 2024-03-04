@@ -1,19 +1,15 @@
 import { MdRemoveRedEye } from "react-icons/md";
 import { IoMdArrowDropright } from "react-icons/io";
+import { RiEyeCloseLine } from "react-icons/ri";
 
-
-
+import axios from "axios";
 export const CatigoryMenu = (props) => {
-  const { names } = props;
-  
-  
+  const { names, eye } = props;
 
   return (
     <div className="flex justify-between items-center py-[10px]">
       <div className="flex items-center gap-2">
-        <div className="text-[20px] text-gray-500">
-          <MdRemoveRedEye />
-        </div>
+        <div className="text-[20px] text-gray-500">{eye}</div>
 
         <div>{names}</div>
       </div>
@@ -26,56 +22,65 @@ export const CatigoryMenu = (props) => {
 
 import { FaPlus } from "react-icons/fa6";
 // import { Login } from "./Login";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AddCatigoryContext } from "./AddCatiProvider";
+import { mapdataContext } from "./MapDataProvider";
 
 export const Category = () => {
   const { addCati, setAddCati } = useContext(AddCatigoryContext);
+  const { setMapdata } = useContext(mapdataContext);
+  const [temp, setTemp] = useState("");
 
- const handleClick = ()=>{
-  setAddCati(false)
- }
-
+  const handleClick = () => {
+    setAddCati(false);
+  };
 
   const catigoryName = [
     {
-      name: "Food & Drinks",
+      name: "Home",
+      id: 1,
+    },
+    {
+      name: "Gift",
+      id: 2,
+    },
+    {
+      name: "Food",
+      id: 3,
+    },
+    {
+      name: "Drink",
+      id: 4,
+    },
+    {
+      name: "Taxi",
+      id: 5,
     },
     {
       name: "Shopping",
+      id: 6,
     },
     {
-      name: "Transportation",
-    },
-    {
-      name: "Vehicle",
-    },
-    {
-      name: "Communication, PC",
-    },
-    {
-      name: "Life & Entertainment",
-    },
-    {
-      name: "Financial expenses",
-    },
-    {
-      name: "Investments",
-    },
-    {
-      name: "Income",
-    },
-    {
-      name: "Others",
+      name: "Communication",
+      id: 7,
     },
   ];
-  const handleLog = (el) => {
+  const handleLog = async (el, id) => {
+    const mail = localStorage.getItem("Email");
     const temp = el.name
       .replace("&", "")
       .replace(",", "")
       .replace(" ", "")
       .replace(" ", "");
-    console.log(temp);
+    // console.log(temp);
+
+    const { data } = await axios.post("http://localhost:8000/getCategorydata", {
+      category: temp,
+    });
+    setTemp(temp);
+    const catedata = data?.filter((el) => el.email === mail);
+
+    setMapdata(catedata);
   };
 
   return (
@@ -91,11 +96,18 @@ export const Category = () => {
             className="mt-[3px] ml-[10px]"
             onClick={() => handleLog(el)}
           >
-            <CatigoryMenu names={el.name} />
+            <CatigoryMenu
+              names={el.name}
+              eye={el.name == temp ? <MdRemoveRedEye /> : <RiEyeCloseLine />}
+              // eye={<MdRemoveRedEye />}
+            />
           </div>
         ))}
-        <div onClick={handleClick} className="ml-[10px] mt-[10px] flex gap-[10px] cursor-pointer">
-          <div  className="text-[20px] text-blue-500">
+        <div
+          onClick={handleClick}
+          className="ml-[10px] mt-[10px] flex gap-[10px] cursor-pointer"
+        >
+          <div className="text-[20px] text-blue-500">
             <FaPlus />
           </div>
           add catigory
@@ -104,3 +116,12 @@ export const Category = () => {
     </div>
   );
 };
+
+// const [press, setPress] = useState(false);
+// const handle = () => {
+//   if (press === data.length) {
+//     setPress(false);
+//   } else {
+//     setPress(true);
+//   }
+// };

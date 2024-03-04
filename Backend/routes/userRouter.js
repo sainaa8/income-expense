@@ -10,6 +10,7 @@ import { GetUserController } from "../controllers/userController.js";
 import { getIncomeExpenceController } from "../controllers/userController.js";
 import { userUpdateController } from "../controllers/userController.js";
 import { getIcomeOnlyController } from "../controllers/userController.js";
+import { getCategoryDtaaController } from "../controllers/userController.js";
 const userRouter = express.Router();
 
 userRouter.post("/login", MiddlewareOfLogin, getLogin);
@@ -22,4 +23,6 @@ userRouter.post("/getUser", GetUserController);
 userRouter.post("/getIncomeExpence", getIncomeExpenceController);
 userRouter.post("/userUpdate", userUpdateController);
 userRouter.post("/getIcomeOnly", getIcomeOnlyController);
+userRouter.post("/getCategorydata", getCategoryDtaaController);
+// userRouter.post("data", getCategoryDtaaController);
 export default userRouter;

@@ -31,6 +31,7 @@ import { PiForkKnifeFill } from "react-icons/pi";
 import { FaTaxi } from "react-icons/fa6";
 import { BiSolidDrink } from "react-icons/bi";
 import { HiMiniShoppingCart } from "react-icons/hi2";
+import { PiTelevisionSimpleDuotone } from "react-icons/pi";
 
 import { useContext } from "react";
 import { mapdataContext } from "./MapDataProvider";
@@ -74,15 +75,19 @@ export const TodaysCatigory = (props) => {
                 (el.category === "Food" && <PiForkKnifeFill />) ||
                 (el.category === "Taxi" && <FaTaxi />) ||
                 (el.category === "Drink" && <BiSolidDrink />) ||
-                (el.category === "Shopping" && <HiMiniShoppingCart />)
+                (el.category === "Shopping" && <HiMiniShoppingCart />) ||
+                (el.category === "Communication" && (
+                  <PiTelevisionSimpleDuotone />
+                ))
               }
               iCol={
-                (el.category === "Home" && "bg-blue-400") ||
+                (el.category === "Home" && "bg-blue-500") ||
                 (el.category === "Gift" && "bg-yellow-400") ||
                 (el.category === "Food" && "bg-red-400") ||
                 (el.category === "Taxi" && "bg-yellow-400") ||
                 (el.category === "Drink" && "bg-purple-400") ||
-                (wl.category === "Shopping" && "bg-purple-200")
+                (el.category === "Shopping" && "bg-purple-200") ||
+                (el.category === "Communication" && "bg-gray-400")
               }
             />
           </div>
