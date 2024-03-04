@@ -1,16 +1,25 @@
 import { Doughnut } from "react-chartjs-2";
 import { DoughnutData } from "./DughnutCard";
 
-
-
-
+import { UserContext } from "./UserProvider";
+import { useContext } from "react";
+import { Login } from "./Login";
 
 export const Doghnut = () => {
+  let foodArrey = [];
+  const { records } = useContext(UserContext);
+  const food = records?.filter((el) => el.category === "Food");
+  for (let i = 0; i < food?.length; i++) {
+    foodArrey.push(Number(food[i].amount));
+  }
+  const foodSum = foodArrey.reduce((a, b) => a + b, 0);
+  const foodMonay = foodSum.toLocaleString();
+
   const data = {
     datasets: [
       {
         label: [],
-        data: [1000, 5555, 1553, 1553, 1555],
+        data: [1000, foodSum, 1553, 1553, 1555],
         backgroundColor: [
           "#1C64F2",
           "#F2901C",
@@ -41,11 +50,7 @@ export const Doghnut = () => {
               desc={"Home"}
               ammount={"5’000’000₮"}
             />
-            <DoughnutData
-              color={"#16BDCA"}
-              desc={"Food"}
-              ammount={"5’000’000₮"}
-            />
+            <DoughnutData color={"#16BDCA"} desc={"Food"} ammount={foodMonay} />
             <DoughnutData
               color={"#FDBA8C"}
               desc={"Shopping"}

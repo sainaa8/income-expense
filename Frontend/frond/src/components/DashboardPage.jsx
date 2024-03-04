@@ -30,6 +30,7 @@ export const DashboardPage = () => {
     const amount = Number(expense[i].amount);
     ex.push(amount);
   }
+  console.log(ex);
   const sumexp = ex.reduce((a, b) => a + b, 0);
   const moneyExp = sumexp.toLocaleString();
 
