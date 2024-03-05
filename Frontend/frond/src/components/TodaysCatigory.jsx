@@ -87,7 +87,7 @@ export const TodaysCatigory = (props) => {
                 (el.category === "Taxi" && "bg-yellow-400") ||
                 (el.category === "Drink" && "bg-purple-400") ||
                 (el.category === "Shopping" && "bg-purple-200") ||
-                (el.category === "Communication" && "bg-gray-400")
+                (el.category === "Communication" && "bg-gray-500")
               }
             />
           </div>

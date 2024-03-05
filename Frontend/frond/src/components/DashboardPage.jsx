@@ -19,17 +19,15 @@ export const DashboardPage = () => {
   let ex = [];
   let incom = [];
 
-  console.log(records);
+  
   // console.log(records[records?.length - 1]);
   const income = records?.filter((item) => item.types === "income");
   const expense = records?.filter((item) => item.types === "expence");
-  console.log(income);
+
+
   console.log(expense);
 
-  for (let i = 0; i < expense?.length; i++) {
-    const amount = Number(expense[i].amount);
-    ex.push(amount);
-  }
+  expense?.forEach((el) => ex.push(Number(el.amount)));
   console.log(ex);
   const sumexp = ex.reduce((a, b) => a + b, 0);
   const moneyExp = sumexp.toLocaleString();
@@ -40,12 +38,11 @@ export const DashboardPage = () => {
   }
   const sumInc = incom.reduce((a, b) => a + b, 0);
   const moneyInc = sumInc.toLocaleString();
-  //
-  // console.log(cash - sumexp + sumInc);
+
   let myCash = cash - sumexp + sumInc;
-  console.log(myCash);
+
   const allMyMoney = myCash.toLocaleString();
-  console.log(allMyMoney);
+
   return (
     <div className="flex flex-col items-center ">
       <div>

@@ -6,20 +6,45 @@ import { useContext } from "react";
 import { Login } from "./Login";
 
 export const Doghnut = () => {
-  let foodArrey = [];
   const { records } = useContext(UserContext);
+  console.log(records);
+  let foodArrey = [];
   const food = records?.filter((el) => el.category === "Food");
-  for (let i = 0; i < food?.length; i++) {
-    foodArrey.push(Number(food[i].amount));
-  }
+  console.log(food);
+  food?.forEach((el) => foodArrey.push(Number(el.amount)));
   const foodSum = foodArrey.reduce((a, b) => a + b, 0);
   const foodMonay = foodSum.toLocaleString();
+
+  let homeArrey = [];
+  const home = records?.filter((el) => el.category === "Home");
+  home?.forEach((el) => homeArrey.push(Number(el.amount)));
+  const homeSum = homeArrey.reduce((a, b) => a + b, 0);
+  const homeMoney = homeSum.toLocaleString();
+
+  let drinkArrey = [];
+  const drink = records?.filter((el) => el.category === "Drink");
+  drink?.forEach((el) => drinkArrey.push(Number(el.amount)));
+  const drinkSum = drinkArrey.reduce((a, b) => a + b, 0);
+  const drinkMoney = drinkSum.toLocaleString();
+
+  let giftArrey = [];
+  const gift = records?.filter((el) => el.category === "Gift");
+  gift?.forEach((el) => giftArrey.push(Number(el.amount)));
+  const giftSum = giftArrey.reduce((a, b) => a + b, 0);
+  const giftMoney = giftSum.toLocaleString();
+
+  let ShoppingArrey = [];
+  const Shopping = records?.filter((el) => el.category === "Shopping");
+  console.log(Shopping);
+  Shopping?.forEach((el) => ShoppingArrey.push(Number(el.amount)));
+  const ShoppingSum = ShoppingArrey.reduce((a, b) => a + b, 0);
+  const ShoppingMoney = ShoppingSum.toLocaleString();
 
   const data = {
     datasets: [
       {
         label: [],
-        data: [1000, foodSum, 1553, 1553, 1555],
+        data: [foodSum, homeSum, ShoppingSum, giftSum, drinkSum],
         backgroundColor: [
           "#1C64F2",
           "#F2901C",
@@ -45,26 +70,18 @@ export const Doghnut = () => {
             <Doughnut data={data} />
           </div>
           <div className=" flex flex-col gap-4 items-center justify-between">
-            <DoughnutData
-              color={"#F2901C"}
-              desc={"Home"}
-              ammount={"5’000’000₮"}
-            />
+            <DoughnutData color={"#F2901C"} desc={"Home"} ammount={homeMoney} />
             <DoughnutData color={"#16BDCA"} desc={"Food"} ammount={foodMonay} />
             <DoughnutData
               color={"#FDBA8C"}
               desc={"Shopping"}
-              ammount={"5’000’000₮"}
+              ammount={ShoppingMoney}
             />
-            <DoughnutData
-              color={"#E74694"}
-              desc={"Gift"}
-              ammount={"5’000’000₮"}
-            />
+            <DoughnutData color={"#E74694"} desc={"Gift"} ammount={giftMoney} />
             <DoughnutData
               color={"#1C64F2"}
               desc={"Drink"}
-              ammount={"5’000’000₮"}
+              ammount={drinkMoney}
             />
           </div>
         </div>
